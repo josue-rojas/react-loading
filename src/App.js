@@ -65,15 +65,15 @@ const BarsExample = (
 const PulseExample = (
   <div>
     <Pulse
-      maxSize={'52px'}
-      minSize={'10px'}
-      borderSize={'1px'}
+      maxSize={52}
+      minSize={10}
+      borderSize={1}
       color={'rgb(223, 77, 255)'}
       delay={1000}/>
     <Pulse
-      maxSize={'60px'}
-      minSize={'10px'}
-      borderSize={'5px'}
+      maxSize={60}
+      minSize={10}
+      borderSize={5}
       color={'rgb(255, 10, 105)'}
       delay={750}/>
   </div>

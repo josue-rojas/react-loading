@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './Styles/Pulse.css';
 
 // props
-// maxSize: string of max size of pulse
-// minSize: string of size of inner circle
-// borderSize: string of size of outer circle (border)
+// maxSize: int (px) of max size of pulse
+// minSize: int (px) of size of inner circle
+// borderSize: int (px) of size of outer circle (border)
 // color: string of color
 // delay: int (ms) of delay for animation
 
@@ -12,8 +12,8 @@ export default class Pulse extends Component{
   render(){
     const style={
       wrapper:{
-        width: this.props.maxSize,
-        height: this.props.maxSize,
+        width: this.props.maxSize + 'px',
+        height: this.props.maxSize + 'px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -22,14 +22,17 @@ export default class Pulse extends Component{
       outer:{
         borderRadius: '100%',
         animation: 'pulse ' + this.props.delay + 'ms linear infinite',
-        border: this.props.borderSize +' solid ' + this.props.color,
-        position: 'absolute',
+        border: this.props.borderSize + 'px solid ' + this.props.color,
       },
       inner:{
-        width: this.props.minSize,
-        height: this.props.minSize,
+        width: this.props.minSize + 'px',
+        height: this.props.minSize + 'px',
         backgroundColor: this.props.color,
         borderRadius: '100%',
+        position: 'absolute',
+        left: 'calc(50% - ' + (this.props.minSize/2) + 'px)',
+        top: 'calc(50% - ' + (this.props.minSize/2) + 'px)',
+
       }
     }
     return(
