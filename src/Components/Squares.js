@@ -48,6 +48,8 @@ export default class Squares extends Component{
       height: this.props.size + 'px',
       // margin is the diagnoal-side of the square? sort of....
       margin: (this.props.size*Math.sqrt(2) - this.props.size) + 'px',
+      // divide by 2 is exact but needs a bit of space
+      // margin: ((this.props.size*Math.sqrt(2) - this.props.size)/2) + 'px',
     }
     return(
       <div style={style}>
