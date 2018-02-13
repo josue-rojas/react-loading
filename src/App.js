@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Spin from './Components/Spin';
-import Dots from './Components/Dots'
+import Dots from './Components/Dots';
+import Bars from './Components/Bars';
+
 
 const SpinExample = (
   <div>
@@ -37,6 +39,27 @@ const DotsExample = (
   </div>
 )
 
+const BarsExample = (
+  <div>
+    <Bars
+    width={'10px'}
+    maxHeight={'30px'}
+    minHeight={'5px'}
+    numBars={5}
+    color={'black'}
+    delay={1000}
+    barDelay={100}/>
+    <Bars
+    width={'10px'}
+    maxHeight={'50px'}
+    minHeight={'1px'}
+    numBars={31}
+    color={'rgb(134, 255, 107)'}
+    delay={1000}
+    barDelay={150}/>
+  </div>
+)
+
 
 class App extends Component {
   render() {
@@ -44,6 +67,7 @@ class App extends Component {
       <div>
         {SpinExample}
         {DotsExample}
+        {BarsExample}
       </div>
     );
   }
