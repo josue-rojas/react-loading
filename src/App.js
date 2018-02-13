@@ -3,7 +3,7 @@ import Spin from './Components/Spin';
 import Dots from './Components/Dots';
 import Bars from './Components/Bars';
 import Pulse from './Components/Pulse';
-
+import Squares from './Components/Squares';
 
 
 const SpinExample = (
@@ -79,6 +79,23 @@ const PulseExample = (
   </div>
 )
 
+const SquaresExample = (
+  <div>
+    <Squares
+      size={52}
+      numSquares={4}
+      delay={2000}
+      squareDelay={70}
+      color={'rgb(103, 77, 255)'}
+      alternate={true}/>
+    <Squares
+      size={102}
+      numSquares={5}
+      delay={2000}
+      squareDelay={100}
+      color={'rgb(103, 77, 155)'}/>
+  </div>
+)
 
 class App extends Component {
   render() {
@@ -88,6 +105,7 @@ class App extends Component {
         {DotsExample}
         {BarsExample}
         {PulseExample}
+        {SquaresExample}
       </div>
     );
   }
