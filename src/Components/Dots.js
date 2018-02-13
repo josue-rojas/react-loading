@@ -7,6 +7,7 @@ import './Styles/Dots.css';
 // color: string color of dots
 // delay: int delay for dots grow and shrink, in ms
 // dotDelay: int delay from dot to dot transition, in ms
+// className: same as default (note: only the class name for outer most div)
 // tip, a smooth effect is delay=dotDelay/10
 
 export default class Dots extends Component{
