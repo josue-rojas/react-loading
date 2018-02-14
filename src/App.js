@@ -4,19 +4,20 @@ import Dots from './Components/Dots';
 import Bars from './Components/Bars';
 import Pulse from './Components/Pulse';
 import Squares from './Components/Squares';
+import SpinDots from './Components/SpinDots';
 
 
 const SpinExample = (
   <div>
     <Spin
       size={32}
-      borderSize={5}
+      borderSize={3}
       primaryColor={'rgba(0, 0, 0, 0.1)'}
       secondaryColor={'red'}
       delay={'1s'}/>
     <Spin
       size={32}
-      borderSize={5}
+      borderSize={10}
       primaryColor={'rgba(0, 0, 0, 0.1)'}
       secondaryColor={'red'}
       delay={'750ms'}
@@ -97,6 +98,21 @@ const SquaresExample = (
   </div>
 )
 
+const SpinDotsExample = (
+  <div>
+    <SpinDots
+      size={20}
+      circleSize={3}
+      delay={2000}
+      color={'rgb(103, 77, 255)'}/>
+    <SpinDots
+      size={40}
+      circleSize={10}
+      delay={1500}
+      color={'rgb(13, 77, 55)'}/>
+  </div>
+)
+
 class App extends Component {
   render() {
     return (
@@ -106,6 +122,7 @@ class App extends Component {
         {BarsExample}
         {PulseExample}
         {SquaresExample}
+        {SpinDotsExample}
       </div>
     );
   }
