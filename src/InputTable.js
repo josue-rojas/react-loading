@@ -7,19 +7,37 @@ export default class InputTable extends Component{
   createInputRows(titles, defaults){
     const inputRows = [];
     const style = {
-      fontWeight: 800,
-      width: '150px',
-      textAlign: 'center',
-      display: 'inline-block',
-      border: '1px solid black',
-      padding: '3px 0',
+      prop: {
+        fontWeight: 800,
+        width: '150px',
+        textAlign: 'center',
+        display: 'inline-block',
+        border: '1px solid black',
+        padding: '5px 0',
+      },
+      inputProp: {
+        fontWeight: 800,
+        width: '150px',
+        textAlign: 'center',
+        display: 'inline-block',
+        border: '1px solid black',
+        padding: '2px 0',
+      },
+      input: {
+        margin: 0,
+        border: 0,
+      }
     }
-    console.log(titles)
     for(let i = 0; i < titles.length; i++){
       inputRows.push(
         <div>
-          <div style={style}>{titles[i]}</div>
-          <div style={style}>{defaults[i]}</div>
+          <div style={style.prop}>{titles[i]}</div>
+          <div style={style.prop}>
+            <input
+              style={style.input}
+              onChange={(e) => this.props.handleInput(e, i)}
+              value={this.props.values[i]}/>
+          </div>
         </div>
       )
     }

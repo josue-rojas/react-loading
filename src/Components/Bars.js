@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import './Styles/Bars.css';
 
 // props
-// width: string of size of width of each bar
-// maxHeight: string of size of max height the bar is going to go
-// minHeight: string of size of min height the bar should go to
+// width: int of size of width of each bar
+// maxHeight: int of size of max height the bar is going to go
+// minHeight: int of size of min height the bar should go to
 // numBars: int of number of bars to display
 // color: string of color the bars should be
 // delay: delay for animation
@@ -18,7 +18,7 @@ export default class Bars extends Component{
   }
   getBarStyle(delay){
     return({
-      minHeight: this.props.minHeight,
+      minHeight: this.props.minHeight + 'px',
       width: '100%',
       backgroundColor: this.props.color,
       animation: 'bars ' + this.props.delay + 'ms linear infinite',
@@ -27,8 +27,8 @@ export default class Bars extends Component{
   }
   makeBars(){
     const barWrapper = {
-        width: this.props.width,
-        height: this.props.maxHeight,
+        width: this.props.width + 'px',
+        height: this.props.maxHeight + 'px',
         display: 'flex',
         alignItems: 'center',
         margin: '1.5px',
