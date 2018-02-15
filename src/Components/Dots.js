@@ -27,8 +27,8 @@ export default class Dots extends Component{
   }
   makeDots(){
     const dotWrapper = {
-        width: this.props.size,
-        height: this.props.size,
+        width: this.props.size + 'px',
+        height: this.props.size + 'px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
