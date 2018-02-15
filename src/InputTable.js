@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 // seperated this cause it was too big...(to fail?!?!?!)
 export default class InputTable extends Component{
-  constructor(props){
-    super(props);
-  }
   createInputRows(titles, defaults){
     const inputRows = [];
     const style = {

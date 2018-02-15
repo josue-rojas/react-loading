@@ -58,7 +58,7 @@ class InnerView extends Component{
       <div style={innerViewStyle}>
         {this.state.loader}
         <InputTable
-          title={'Spinner'}
+          title={this.props.maker.title}
           titles={this.props.maker.titles}
           values={this.state.inputValues}
           handleInput={this.handleInput}/>
@@ -93,7 +93,7 @@ class App extends Component {
 
   findNext(currPos, forward){
     // cant divide by zero
-    if(currPos == 0) return forward ? this.state.positions[1] : this.state.positions[-1] ;
+    if(currPos === 0) return forward ? this.state.positions[1] : this.state.positions[-1] ;
     return this.state.positions[Math.floor(currPos / this.state.viewSize) + (forward ? 1 : -1)];
   }
 
@@ -120,7 +120,7 @@ class App extends Component {
       default:
         break;
     }
-    if(nextPos != undefined) window.scroll(0, nextPos);
+    if(nextPos !== undefined) window.scroll(0, nextPos);
   }
   render() {
     // loaders inner views
