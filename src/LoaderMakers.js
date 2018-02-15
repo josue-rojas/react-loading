@@ -1,4 +1,5 @@
 // LoadingComponent Creater classes for input table (much neater here displaying)
+// if loader's prop must be an int then you need to parse it or it will be consider a string ("100" + "100" + "100100" wereas 100+100 = 200)
 import React from 'react';
 import Spin from './Components/Spin';
 import Dots from './Components/Dots';
@@ -35,7 +36,7 @@ class DotMaker {
         numDots={props[1]}
         color={props[2]}
         delay={props[3]}
-        dotDelay={props[4]}/>
+        dotDelay={parseInt(props[4])}/>
     )
   }
 }
@@ -54,7 +55,7 @@ class BarsMaker {
         numBars={props[3]}
         color={props[4]}
         delay={props[5]}
-        barDelay={props[6]}/>
+        barDelay={parseInt(props[6])}/>
     )
   }
 }
@@ -88,7 +89,7 @@ class SquaresMaker {
         size={props[0]}
         numSquares={props[1]}
         delay={props[2]}
-        squareDelay={props[3]}
+        squareDelay={parseInt(props[3])}
         color={props[4]}
         alternate={props[5]}/>
     )

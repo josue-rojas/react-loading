@@ -15,7 +15,6 @@ class FullView extends Component{
     const style = {
       width: '100vw',
       height: this.props.height, //set by parent to handle window resize
-      // minHeight: '568px', // fix tiny screen cutting it... (need a better design)
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
