@@ -8,6 +8,7 @@ import Squares from './Components/Squares';
 import SpinDots from './Components/SpinDots';
 
 class SpinnerMaker {
+  static title = 'Spinner'
   static titles = ['size', 'borderSize', 'primaryColor', 'secondaryColor', 'delay', 'doubleBorder']
   static defaults = [100, 3, 'rgba(0, 0, 0, 0.1)', 'red', '1s', 1]
   static make(props = this.defaults){
@@ -23,6 +24,7 @@ class SpinnerMaker {
 }
 
 class DotMaker {
+  static title = 'Dots';
   static titles = ['size', 'numDots', 'color', 'delay', 'dotDelay']
   static defaults = [25, 10, 'rgb(130, 200, 253)', 1000, 100]
   static make(props=this.defaults){
@@ -39,6 +41,7 @@ class DotMaker {
 }
 
 class BarsMaker {
+  static title = 'Bars';
   static titles = ['width', 'maxHeight', 'minHeight', 'numBars', 'color', 'delay', 'barDelay']
   static defaults = [7, 70, 1, 31, 'rgb(134, 255, 253)',1000, 150]
   static make(props=this.defaults){
@@ -58,6 +61,7 @@ class BarsMaker {
 
 
 class PulseMaker {
+  static title = 'Pulse';
   static titles = ['maxSize', 'minSize', 'borderSize', 'color', 'delay']
   static defaults = [100, 10, 1, 'rgb(223, 77, 255)',1000]
   static make(props=this.defaults){
@@ -74,6 +78,7 @@ class PulseMaker {
 }
 
 class SquaresMaker {
+  static title = 'Squares';
   static titles = ['size', 'numSquares', 'delay', 'squareDelay', 'color', 'alternate']
   static defaults = [100, 4, 2000, 70, 'rgb(103, 77, 255)', 1]
   static make(props=this.defaults){
@@ -91,6 +96,7 @@ class SquaresMaker {
 }
 
 class SpinDotsMaker {
+  static title = 'SpinDots';
   static titles = ['size', 'circleSize', 'delay', 'color']
   static defaults = [100, 10, 1500, 'rgb(13, 77, 55)']
   static make(props=this.defaults){
