@@ -14,7 +14,8 @@ class FullView extends Component{
   render(){
     const style = {
       width: '100vw',
-      height: '100vh',
+      height: this.props.height, //set by parent to handle window resize
+      // minHeight: '568px', // fix tiny screen cutting it... (need a better design)
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
@@ -73,11 +74,12 @@ class App extends Component {
     this.state = {
       positions: [],
       viewSize: 0,
+      windowHeight: 0,
     }
+    this.handleResize = this.handleResize.bind(this);
     this.findNext = this.findNext.bind(this);
     this.handleKeys = this.handleKeys.bind(this);
   }
-
   componentDidMount(){
     const views = document.getElementsByClassName('Full-View');
     const viewsPosition = [];
@@ -88,9 +90,16 @@ class App extends Component {
       positions: viewsPosition,
       // will give error if view 1 does not exist
       viewSize: views[1].offsetTop,
+      windowHeight: window.innerHeight > 568 ? '100vh' : '568px',
     })
+    window.addEventListener('resize', this.handleResize);
   }
-
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.handleResize);
+  }
+  handleResize(){
+    this.setState({windowHeight: window.innerHeight > 568 ? '100vh' : '568px'});
+  }
   findNext(currPos, forward){
     // cant divide by zero
     if(currPos === 0) return forward ? this.state.positions[1] : this.state.positions[-1] ;
@@ -98,7 +107,6 @@ class App extends Component {
   }
 
   handleKeys(e){
-    let currPos = window.pageYOffset;
     let nextPos = 0;
     switch(e.keyCode){
       case 37:
@@ -118,8 +126,9 @@ class App extends Component {
         nextPos = this.findNext(currPos, true)
         break;
       default:
-        break;
+        return
     }
+    let currPos = window.pageYOffset;
     if(nextPos !== undefined) window.scroll(0, nextPos);
   }
   render() {
@@ -133,12 +142,12 @@ class App extends Component {
 
     return (
       <div onKeyDown={this.handleKeys} tabIndex="0">
-        <FullView stuff={spinnnerInner} bgColor={'rgb(225,225,225)'}/>
-        <FullView stuff={dotInner} bgColor={'rgb(225,225,225)'}/>
-        <FullView stuff={barsInner} bgColor={'rgb(225,225,225)'}/>
-        <FullView stuff={pulseInner} bgColor={'rgb(225,225,225)'}/>
-        <FullView stuff={squaresInner} bgColor={'rgb(225,225,225)'}/>
-        <FullView stuff={spinDotsInner} bgColor={'rgb(225,225,225)'}/>
+        <FullView stuff={spinnnerInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
+        <FullView stuff={dotInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
+        <FullView stuff={barsInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
+        <FullView stuff={pulseInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
+        <FullView stuff={squaresInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
+        <FullView stuff={spinDotsInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
       </div>
     );
   }
