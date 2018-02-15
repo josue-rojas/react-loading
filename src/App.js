@@ -1,128 +1,113 @@
 import React, { Component } from 'react';
-import Spin from './Components/Spin';
-import Dots from './Components/Dots';
-import Bars from './Components/Bars';
-import Pulse from './Components/Pulse';
-import Squares from './Components/Squares';
-import SpinDots from './Components/SpinDots';
+import InputTable from './InputTable'
+import * as Loaders from './LoaderMakers';
 
+// a FullView is a div that represents a full screen page with everything center.....simple..... (a slideshow sort of)
+class FullView extends Component{
+  render(){
+    const style = {
+      width: '100vw',
+      height: '100vh',
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      backgroundColor: this.props.bgColor,
+      backgroundImage: this.props.backgroundImage,
+    }
+    return(
+      <div className='Full-View' style={style}>
+        {this.props.stuff}
+      </div>
+    )
+  }
+}
 
-const SpinExample = (
-  <div>
-    <Spin
-      size={32}
-      borderSize={3}
-      primaryColor={'rgba(0, 0, 0, 0.1)'}
-      secondaryColor={'red'}
-      delay={'1s'}/>
-    <Spin
-      size={32}
-      borderSize={10}
-      primaryColor={'rgba(0, 0, 0, 0.1)'}
-      secondaryColor={'red'}
-      delay={'750ms'}
-      doubleBorder={true}/>
-  </div>
-)
-
-const DotsExample = (
-  <div>
-    <Dots
-      size={32}
-      numDots={10}
-      color={'rgb(71, 255, 253)'}
-      delay={1000}
-      dotDelay={100}/>
-    <Dots
-      size={12}
-      numDots={5}
-      color={'rgb(130, 200, 253)'}
-      delay={750}
-      dotDelay={0}/>
-  </div>
-)
-
-const BarsExample = (
-  <div>
-    <Bars
-      width={'10px'}
-      maxHeight={'30px'}
-      minHeight={'5px'}
-      numBars={5}
-      color={'black'}
-      delay={1000}
-      barDelay={100}/>
-    <Bars
-      width={'10px'}
-      maxHeight={'50px'}
-      minHeight={'1px'}
-      numBars={31}
-      color={'rgb(134, 255, 107)'}
-      delay={1000}
-      barDelay={150}/>
-  </div>
-)
-
-const PulseExample = (
-  <div>
-    <Pulse
-      maxSize={52}
-      minSize={10}
-      borderSize={1}
-      color={'rgb(223, 77, 255)'}
-      delay={1000}/>
-    <Pulse
-      maxSize={60}
-      minSize={10}
-      borderSize={5}
-      color={'rgb(255, 10, 105)'}
-      delay={750}/>
-  </div>
-)
-
-const SquaresExample = (
-  <div>
-    <Squares
-      size={52}
-      numSquares={4}
-      delay={2000}
-      squareDelay={70}
-      color={'rgb(103, 77, 255)'}
-      alternate={true}/>
-    <Squares
-      size={102}
-      numSquares={5}
-      delay={2000}
-      squareDelay={100}
-      color={'rgb(103, 77, 155)'}/>
-  </div>
-)
-
-const SpinDotsExample = (
-  <div>
-    <SpinDots
-      size={20}
-      circleSize={3}
-      delay={2000}
-      color={'rgb(103, 77, 255)'}/>
-    <SpinDots
-      size={40}
-      circleSize={10}
-      delay={1500}
-      color={'rgb(13, 77, 55)'}/>
-  </div>
-)
+class InnerView extends Component{
+  constructor(props){
+    super(props)
+  }
+  render(){
+    const innerViewStyle={
+      display:'flex',
+      justifyContent: 'center',
+      alignItems: 'center',
+      flexDirection: 'column'
+     }
+    return(
+      <div style={innerViewStyle}>
+        {this.props.maker.make()}
+        <InputTable
+          title={'Spinner'}
+          titles={this.props.maker.titles}
+          defaults={this.props.maker.defaults}/>
+      </div>
+    )
+  }
+}
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      positions: [],
+      viewSize: 0,
+    }
+    this.findNext = this.findNext.bind(this);
+    this.handleKeys = this.handleKeys.bind(this);
+  }
+
+  componentDidMount(){
+    const views = document.getElementsByClassName('Full-View');
+    const viewsPosition = [];
+    for(let i = 0; i < views.length; i++){
+      viewsPosition.push(views[i].offsetTop)
+    }
+    this.setState({
+      positions: viewsPosition,
+      // will give error if view 1 does not exist
+      viewSize: views[1].offsetTop,
+    })
+  }
+
+  findNext(currPos, forward){
+    // cant divide by zero
+    if(currPos == 0) return forward ? this.state.positions[1] : this.state.positions[-1] ;
+    return this.state.positions[Math.floor(currPos / this.state.viewSize) + (forward ? 1 : -1)];
+  }
+
+  handleKeys(e){
+    let currPos = window.pageYOffset;
+    let nextPos = 0;
+    switch(e.keyCode){
+      case 37:
+        // left
+        nextPos = this.findNext(currPos, false)
+        break;
+      case 38:
+        // up
+        nextPos = this.findNext(currPos, false)
+        break;
+      case 39:
+        // right
+        nextPos = this.findNext(currPos, true)
+        break;
+      case 40:
+        // down
+        nextPos = this.findNext(currPos, true)
+        break;
+      default:
+        break;
+    }
+    if(nextPos != undefined) window.scroll(0, nextPos);
+  }
   render() {
+    const spinnnerInner = (<InnerView maker={Loaders.SpinnerMaker}/>)
+    const dotInner = (<InnerView maker={Loaders.DotMaker}/>)
+
     return (
-      <div>
-        {SpinExample}
-        {DotsExample}
-        {BarsExample}
-        {PulseExample}
-        {SquaresExample}
-        {SpinDotsExample}
+      <div onKeyDown={this.handleKeys} tabIndex="0">
+        <FullView stuff={spinnnerInner} bgColor={'rgb(225,225,225)'}/>
+        <FullView stuff={dotInner} bgColor={'rgb(225,225,225)'}/>
       </div>
     );
   }

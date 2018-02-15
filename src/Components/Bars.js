@@ -40,7 +40,6 @@ export default class Bars extends Component{
         <div style={barWrapper}>
           <div style={this.getBarStyle(delay)}/>
         </div>)
-      console.log(delay)
       delay+=this.props.barDelay;
     }
     return bars;
