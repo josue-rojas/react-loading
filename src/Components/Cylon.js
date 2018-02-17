@@ -1,6 +1,16 @@
 import React, { Component } from 'react';
 import './Styles/Cylon.css';
 
+// props
+// maxWidth: int (px) size of the whole div
+// minWidth: int (px) size of the rectangles
+// height: int (px) size of height of the whole div
+// numRect: int number of rectangles
+// color: string color of the rectangles
+// opacityChange: float of how much to lower the opacity after each rect
+// delay: int delay of the animation
+// rectDelay: int delay of start after each rect
+
 export default class Cylon extends Component{
   constructor(props){
     super(props);
