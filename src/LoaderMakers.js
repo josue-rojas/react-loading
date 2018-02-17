@@ -7,6 +7,8 @@ import Bars from './Components/Bars';
 import Pulse from './Components/Pulse';
 import Squares from './Components/Squares';
 import SpinDots from './Components/SpinDots';
+import Cylon from './Components/Cylon';
+
 
 class SpinnerMaker {
   static title = 'Spinner'
@@ -112,7 +114,27 @@ class SpinDotsMaker {
   }
 }
 
-export {SpinnerMaker, DotMaker, BarsMaker, PulseMaker, SquaresMaker, SpinDotsMaker};
+class CylonMaker {
+  static title = 'Cylon';
+  static titles = ['maxWidth', 'minWidth', 'height', 'numRect', 'color', 'opacityChange', 'delay', 'rectDelay']
+  static defaults = [200, 30, 20, 5, 'rgb(255,70,55)', .3, 750, 65]
+  static make(props=this.default){
+    return(
+      <Cylon
+        key={Math.random()}
+        maxWidth={parseInt(props[0])}
+        minWidth={parseInt(props[1])}
+        height={props[2]}
+        numRect={props[3]}
+        color={props[4]}
+        opacityChange={props[5]}
+        delay={props[6]}
+        rectDelay={parseInt(props[7])}/>
+    )
+  }
+}
+
+export const Makers = [SpinnerMaker, DotMaker, BarsMaker, PulseMaker, SquaresMaker, SpinDotsMaker, CylonMaker]
 
 // ----------------------
 // other examples which look nice

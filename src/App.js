@@ -3,7 +3,6 @@ import InputTable from './InputTable'
 import * as Loaders from './LoaderMakers';
 
 // BUGS BUGS BUGS (and features):
-// loaders that have 2 delays do not re render correctly when changing the inner delay
 // does keypress navigation does not work when resize (need to check resize and update)
 // booleans should be 0 or 1 in loaders to make it easier to change in input
 // should have navigation button so mobile can use the auto scrolling
@@ -130,23 +129,24 @@ class App extends Component {
     let currPos = window.pageYOffset;
     if(nextPos !== undefined) window.scroll(0, nextPos);
   }
+  // make views automatically just add them in Loaders.Makers array
+  makeViews(height){
+    const Views = [];
+    for(let i = 0; i < Loaders.Makers.length; i++){
+      Views.push(
+        <FullView
+          stuff={(<InnerView maker={Loaders.Makers[i]}/>)}
+          bgColor={'rgb(225,225,225)'}
+          height={height}/>
+      )
+    }
+    return Views;
+  }
   render() {
-    // loaders inner views
-    const spinnnerInner = (<InnerView maker={Loaders.SpinnerMaker}/>)
-    const dotInner = (<InnerView maker={Loaders.DotMaker}/>)
-    const barsInner = (<InnerView maker={Loaders.BarsMaker}/>)
-    const pulseInner = (<InnerView maker={Loaders.PulseMaker}/>)
-    const squaresInner = (<InnerView maker={Loaders.SquaresMaker}/>)
-    const spinDotsInner = (<InnerView maker={Loaders.SpinDotsMaker}/>)
-
+    const Views = this.makeViews(this.state.windowHeight);
     return (
       <div onKeyDown={this.handleKeys} tabIndex="0">
-        <FullView stuff={spinnnerInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
-        <FullView stuff={dotInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
-        <FullView stuff={barsInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
-        <FullView stuff={pulseInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
-        <FullView stuff={squaresInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
-        <FullView stuff={spinDotsInner} bgColor={'rgb(225,225,225)'} height={this.state.windowHeight}/>
+        {Views}
       </div>
     );
   }
