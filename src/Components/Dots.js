@@ -39,7 +39,7 @@ export default class Dots extends Component{
     let delay = 0;
     for(let i = 0; i < this.props.numDots; i++){
       dots.push(
-        <div style={dotWrapper}>
+        <div style={dotWrapper} key={i+'dots'}>
           <div style={this.getDotStyle(delay)}/>
         </div>);
       delay+=this.props.dotDelay;

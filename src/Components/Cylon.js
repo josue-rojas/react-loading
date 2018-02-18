@@ -35,7 +35,7 @@ export default class Cylon extends Component{
     let opacity = 1;
     for(let i = 0; i < this.props.numRect; i++){
       rects.push(
-        <div style={this.getRectStyle(delay, opacity)}/>
+        <div key={i + 'rects'} style={this.getRectStyle(delay, opacity)}/>
       )
       opacity-=this.props.opacityChange;
       delay+=this.props.rectDelay;

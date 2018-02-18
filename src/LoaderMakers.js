@@ -8,7 +8,7 @@ import Pulse from './Components/Pulse';
 import Squares from './Components/Squares';
 import SpinDots from './Components/SpinDots';
 import Cylon from './Components/Cylon';
-
+import HyperTriangle from './Components/HyperTriangle';
 
 class SpinnerMaker {
   static title = 'Spinner'
@@ -117,8 +117,8 @@ class SpinDotsMaker {
 class CylonMaker {
   static title = 'Cylon';
   static titles = ['maxWidth', 'minWidth', 'height', 'numRect', 'color', 'opacityChange', 'delay', 'rectDelay']
-  static defaults = [200, 30, 20, 5, 'rgb(255,70,55)', .3, 750, 65]
-  static make(props=this.default){
+  static defaults = [200, 30, 20, 5, 'rgb(255,70,55)', .2, 750, 65]
+  static make(props=this.defaults){
     return(
       <Cylon
         key={Math.random()}
@@ -134,4 +134,18 @@ class CylonMaker {
   }
 }
 
-export const Makers = [SpinnerMaker, DotMaker, BarsMaker, PulseMaker, SquaresMaker, SpinDotsMaker, CylonMaker]
+class HyperTriangleMaker {
+  static title = 'HyperTriangle';
+  static titles = ['maxSize', 'borderSize']
+  static defaults = [65, 5]
+  static make(props=this.defaults){
+    return(
+      <HyperTriangle
+        key={Math.random()}
+        maxSize={props[0]}
+        borderSize={props[1]}/>
+    )
+  }
+}
+
+export const Makers = [SpinnerMaker, DotMaker, BarsMaker, PulseMaker, SquaresMaker, SpinDotsMaker, CylonMaker, HyperTriangleMaker]

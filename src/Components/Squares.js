@@ -33,7 +33,7 @@ export default class Squares extends Component{
     let alternate = true;
     for(let i = 0; i < this.props.numSquares; i++){
       squares.push(
-        <div style={this.getSquareStyle(animationDelay, alternate)}/>
+        <div key={i+'squares'} style={this.getSquareStyle(animationDelay, alternate)}/>
       )
       if(this.props.alternate) alternate = !alternate;
       animationDelay+=this.props.squareDelay;
