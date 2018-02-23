@@ -135,7 +135,7 @@ class CylonMaker {
 }
 
 class HyperTriangleMaker {
-  static title = 'HyperTriangle (workinprogress)';
+  static title = 'HyperTriangle';
   static titles = ['maxSize', 'borderSize', 'numTrian', 'sizeDif']
   static defaults = [150, 3, 5, 30]
   static make(props=this.defaults){
