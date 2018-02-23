@@ -38,7 +38,7 @@ class DotMaker {
         numDots={props[1]}
         color={props[2]}
         delay={props[3]}
-        dotDelay={parseInt(props[4])}/>
+        dotDelay={parseInt(props[4],10)}/>
     )
   }
 }
@@ -57,7 +57,7 @@ class BarsMaker {
         numBars={props[3]}
         color={props[4]}
         delay={props[5]}
-        barDelay={parseInt(props[6])}/>
+        barDelay={parseInt(props[6],10)}/>
     )
   }
 }
@@ -91,7 +91,7 @@ class SquaresMaker {
         size={props[0]}
         numSquares={props[1]}
         delay={props[2]}
-        squareDelay={parseInt(props[3])}
+        squareDelay={parseInt(props[3],10)}
         color={props[4]}
         alternate={props[5]}/>
     )
@@ -122,22 +122,22 @@ class CylonMaker {
     return(
       <Cylon
         key={Math.random()}
-        maxWidth={parseInt(props[0])}
-        minWidth={parseInt(props[1])}
+        maxWidth={parseInt(props[0],10)}
+        minWidth={parseInt(props[1],10)}
         height={props[2]}
         numRect={props[3]}
         color={props[4]}
         opacityChange={props[5]}
         delay={props[6]}
-        rectDelay={parseInt(props[7])}/>
+        rectDelay={parseInt(props[7],10)}/>
     )
   }
 }
 
 class HyperTriangleMaker {
-  static title = 'HyperTriangle';
+  static title = 'HyperTriangle (workinprogress)';
   static titles = ['maxSize', 'borderSize']
-  static defaults = [65, 5]
+  static defaults = [150, 3]
   static make(props=this.defaults){
     return(
       <HyperTriangle
