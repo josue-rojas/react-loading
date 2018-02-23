@@ -13,14 +13,14 @@ class Triangle extends Component{
   constructor(props){
     super(props);
     const width = this.props.startWidth
-    const degree = 60*(Math.PI/180);
+    const degree = this.props.degree;
     const opacity = 1 - width/this.props.width
     this.state = {
       width: width,
       color: 'rgb(' + getRandomInt(0,256) + ',' + getRandomInt(0,256) + ',' + getRandomInt(0,256) + ')',
       degree: degree,
-      bottom: -(Math.sin(degree)*-(width/2)),
-      left:  Math.cos(degree)*-(width/2),
+      bottom: this.props.bottoms[width],
+      left:  this.props.lefts[width],
       opacity: opacity
     }
     this.changeSize = this.changeSize.bind(this);
@@ -38,8 +38,8 @@ class Triangle extends Component{
     this.setState({
       color: width === 0 ? 'rgb(' + getRandomInt(0,256) + ',' + getRandomInt(0,256) + ',' + getRandomInt(0,256) + ')' : this.state.color,
       width: width,
-      bottom: -(Math.sin(this.state.degree)*-(width/2)),
-      left:  Math.cos(this.state.degree)*-(width/2),
+      bottom: this.props.bottoms[width],
+      left:  this.props.lefts[width],
       opacity: opacity,
     })
     return 0;
@@ -91,6 +91,35 @@ class Triangle extends Component{
 }
 
 export default class HyperTriangle extends Component{
+  constructor(props){
+    super(props);
+    this.makeTriangles = this.makeTriangles.bind(this);
+  }
+  makeTriangles(){
+    const triangles = [];
+    let startWidth = this.props.maxSize;
+    const degree = 60*(Math.PI/180);
+    const bottoms = [];
+    const lefts = [];
+    // less calculations if you do them right away
+    for(let j = 0; j < this.props.maxSize; j++){
+      bottoms.push(-(Math.sin(degree)*-(j/2)));
+      lefts.push(Math.cos(degree)*-(j/2));
+    }
+    for(let i = 0; i < this.props.numTrian; i++){
+      triangles.push(
+        <Triangle
+          width={this.props.maxSize}
+          startWidth={startWidth}
+          borderSize={this.props.borderSize}
+          degree={degree}
+          bottoms={bottoms}
+          lefts={lefts}/>
+      )
+      startWidth-=this.props.sizeDiff;
+    }
+    return triangles;
+  }
   render(){
     const style = {
       box: {
@@ -104,26 +133,7 @@ export default class HyperTriangle extends Component{
     }
     return(
       <div style={style.box}>
-        <Triangle
-          width={this.props.maxSize}
-          startWidth={this.props.maxSize}
-          borderSize={this.props.borderSize}/>
-        <Triangle
-          width={this.props.maxSize}
-          startWidth={this.props.maxSize*Math.random()}
-          borderSize={this.props.borderSize}/>
-        <Triangle
-          width={this.props.maxSize}
-          startWidth={this.props.maxSize*Math.random()}
-          borderSize={this.props.borderSize}/>
-        <Triangle
-          width={this.props.maxSize}
-          startWidth={this.props.maxSize*Math.random()}
-          borderSize={this.props.borderSize}/>
-        <Triangle
-          width={this.props.maxSize}
-          startWidth={this.props.maxSize*Math.random()}
-          borderSize={this.props.borderSize}/>
+        {this.makeTriangles()}
       </div>
     )
   }

@@ -136,14 +136,16 @@ class CylonMaker {
 
 class HyperTriangleMaker {
   static title = 'HyperTriangle (workinprogress)';
-  static titles = ['maxSize', 'borderSize']
-  static defaults = [150, 3]
+  static titles = ['maxSize', 'borderSize', 'numTrian', 'sizeDif']
+  static defaults = [150, 3, 5, 30]
   static make(props=this.defaults){
     return(
       <HyperTriangle
         key={Math.random()}
-        maxSize={props[0]}
-        borderSize={props[1]}/>
+        maxSize={parseInt(props[0],10)}
+        borderSize={props[1]}
+        numTrian={props[2]}
+        sizeDiff={parseInt(props[3],10)}/>
     )
   }
 }
