@@ -37,7 +37,7 @@ export default class Bars extends Component{
     let delay = 0;
     for(let i = 0; i < this.props.numBars; i++){
       bars.push(
-        <div style={barWrapper}>
+        <div style={barWrapper} key={i+'bars'}>
           <div style={this.getBarStyle(delay)}/>
         </div>)
       delay+=this.props.barDelay;

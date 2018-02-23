@@ -79,33 +79,34 @@ class App extends Component {
     this.handleKeys = this.handleKeys.bind(this);
   }
   componentDidMount(){
-    const views = document.getElementsByClassName('Full-View');
-    const viewsPosition = [];
-    for(let i = 0; i < views.length; i++){
-      viewsPosition.push(views[i].offsetTop)
-    }
-    this.setState({
-      positions: viewsPosition,
-      // will give error if view 1 does not exist
-      viewSize: views[1].offsetTop,
-      windowHeight: window.innerHeight > 568 ? '100vh' : '568px',
-    })
+    this.handleResize();
     window.addEventListener('resize', this.handleResize);
   }
   componentWillUnmount(){
     window.removeEventListener('resize', this.handleResize);
   }
   handleResize(){
-    this.setState({windowHeight: window.innerHeight > 568 ? '100vh' : '568px'});
+    const views = document.getElementsByClassName('Full-View');
+    const viewsPosition = [];
+    const viewSize = window.innerHeight;
+    let viewPos = 0;
+    for(let i = 0; i < views.length; i++){
+      viewsPosition.push(viewPos);
+      viewPos+=viewSize;
+    }
+    this.setState({
+      positions: viewsPosition,
+      viewSize: viewSize,
+    })
   }
   findNext(currPos, forward){
     // cant divide by zero
     if(currPos === 0) return forward ? this.state.positions[1] : this.state.positions[-1] ;
     return this.state.positions[Math.floor(currPos / this.state.viewSize) + (forward ? 1 : -1)];
   }
-
   handleKeys(e){
-    let nextPos = 0;
+    let nextPos = undefined;
+    let currPos = window.pageYOffset;
     switch(e.keyCode){
       case 37:
         // left
@@ -124,9 +125,8 @@ class App extends Component {
         nextPos = this.findNext(currPos, true)
         break;
       default:
-        return
+        break;
     }
-    let currPos = window.pageYOffset;
     if(nextPos !== undefined) window.scroll(0, nextPos);
   }
   // make views automatically just add them in Loaders.Makers array
@@ -135,6 +135,7 @@ class App extends Component {
     for(let i = 0; i < Loaders.Makers.length; i++){
       Views.push(
         <FullView
+          key={i+'FullView'}
           stuff={(<InnerView maker={Loaders.Makers[i]}/>)}
           bgColor={'rgb(225,225,225)'}
           height={height}/>
@@ -143,7 +144,7 @@ class App extends Component {
     return Views;
   }
   render() {
-    const Views = this.makeViews(this.state.windowHeight);
+    const Views = this.makeViews(this.state.viewSize);
     return (
       <div onKeyDown={this.handleKeys} tabIndex="0">
         {Views}

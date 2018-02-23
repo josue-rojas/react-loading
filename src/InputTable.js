@@ -27,13 +27,14 @@ export default class InputTable extends Component{
     }
     for(let i = 0; i < titles.length; i++){
       inputRows.push(
-        <div>
+        <div key={i+'inputrow'}>
           <div style={style.prop}>{titles[i]}</div>
           <div style={style.prop}>
             <input
               style={style.input}
+              onKeyDown={(e)=>{ e.stopPropagation();}}
               onChange={(e) => this.props.handleInput(e, i)}
-              value={this.props.values[i]}/>
+              value={defaults[i]}/>
           </div>
         </div>
       )
@@ -61,7 +62,7 @@ export default class InputTable extends Component{
         padding: '3px 0',
       },
     }
-    const inputRows = this.createInputRows(this.props.titles, this.props.defaults);
+    const inputRows = this.createInputRows(this.props.titles, this.props.values);
     return(
       <div>
         <div style={style.title}>{this.props.title}</div>
