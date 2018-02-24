@@ -1,0 +1,120 @@
+.SideMenu{
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  transform: translate(0%);
+  transition: 400ms;
+}
+.SideMenu.left{
+  transform: translate(-100%);
+}
+.SideMenu.right{
+  transform: translate(100%);
+}
+.icon{
+  margin: 7px;
+  position: absolute;
+  z-index: 4;
+}
+.icon.left{
+  left: 0;
+}
+.icon.right{
+  right: 0;
+}
+
+@media (min-width: 992px) {
+  .SideMenu {
+    width: 300px;
+    }
+  .icon{
+    display: none;
+  }
+  .SideMenu.pos-left{
+    transform: translate(0%);
+  }
+  .SideMenu.pos-right{
+    transform: translate(0%);
+    right: 0;
+  }
+}
+
+/* stole this from my other project https://github.com/josuerojasrojas/josuerojasrojas.github.io-react/blob/master/src/styles/sass/HamburgerMenu.sass */
+.hamburger-menu {
+  display: inline-block;
+  height: 32px;
+  width: 32px;
+  cursor: pointer;
+  position: relative;
+  z-index: 3; }
+  .hamburger-menu:hover .line {
+    background-color: #05fbff; }
+  .hamburger-menu .line {
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    background-color: black;
+    border-radius: 10px;
+    transition: 300ms; }
+    .hamburger-menu .line.top {
+      margin-top: 4px; }
+    .hamburger-menu .line.mid {
+      margin-top: 13px; }
+    .hamburger-menu .line.bottom {
+      margin-top: 22px; }
+  .hamburger-menu.active .line.top {
+    transform: rotate(-45deg);
+    margin-top: 50%; }
+  .hamburger-menu.active .line.mid {
+    opacity: 0; }
+  .hamburger-menu.active .line.bottom {
+    transform: rotate(45deg);
+    margin-top: 50%; }
+
+.dot-menu{
+  display: inline-block;
+  height: 14px;
+  width: 48px;
+  margin-top: 9px;
+  cursor: pointer;
+  position: relative;
+  z-index: 3; }
+.dot-menu .dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: black;
+  display: inline-block;
+  margin: 3px;
+  transition: 400ms;
+  position: absolute;
+}
+.dot-menu .dot.mid {
+  margin-left: 16px  }
+.dot-menu .dot.bottom {
+  margin-left: 29px}
+.dot-menu:hover .dot{
+  background-color: #05fbff;
+}
+.dot-menu.active{
+  margin-top: 0px;
+  height: 32px;
+  width: 32px;
+}
+.dot-menu.active .dot{
+  position: absolute;
+  width: 32px;
+  height: 5px;
+  border-radius: 10px;
+  margin: 0;
+}
+.dot-menu.active .dot.top {
+  transform: rotate(-45deg);
+  margin-top: 50%; }
+.dot-menu.active .dot.mid {
+  opacity: 0; }
+.dot-menu.active .dot.bottom {
+  transform: rotate(45deg);
+  margin-top: 50%; }
