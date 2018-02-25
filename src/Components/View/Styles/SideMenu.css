@@ -1,5 +1,5 @@
 .SideMenu{
-  min-height: calc(100vh - 40px);
+  min-height: calc(100vh - 50px);
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
   transform: translate(0%);
   transition: 400ms;
   align-items: center;
-  padding-top: 40px;
+  padding-top: 50px;
   z-index: 3;
   margin: 0;
 }
@@ -54,7 +54,7 @@
   position: relative;
   z-index: 3; }
   .hamburger-menu:hover .line {
-    background-color: #05fbff; }
+    background-color: rgba(5, 244, 255, 1); }
   .hamburger-menu .line {
     position: absolute;
     width: 100%;
@@ -100,7 +100,7 @@
 .dot-menu .dot.bottom {
   margin-left: 29px}
 .dot-menu:hover .dot{
-  background-color: #05fbff;
+  background-color: rgba(5, 244, 255, 1);
 }
 .dot-menu.active{
   margin-top: 0px;

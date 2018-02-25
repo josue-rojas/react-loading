@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import InputTable from './Components/View/InputTable'
 import SideMenu from './Components/View/SideMenu'
 import Inputs from './Components/View/Inputs'
 import * as Loaders from './Components/View/LoaderMakers';
@@ -47,6 +46,7 @@ export default class App extends Component{
       links.push(
         <a className='menu-link' href={'#' + i}>
           {Loaders.Makers[i].title}
+          <div className='line'/>
         </a>)
       }
     return links;
