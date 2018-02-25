@@ -1,14 +1,14 @@
 // LoadingComponent Creater classes for input table (much neater here displaying)
 // if loader's prop must be an int then you need to parse it or it will be consider a string ("100" + "100" + "100100" wereas 100+100 = 200)
 import React from 'react';
-import Spin from './Components/Spin';
-import Dots from './Components/Dots';
-import Bars from './Components/Bars';
-import Pulse from './Components/Pulse';
-import Squares from './Components/Squares';
-import SpinDots from './Components/SpinDots';
-import Cylon from './Components/Cylon';
-import HyperTriangle from './Components/HyperTriangle';
+import Spin from '../Loaders/Spin';
+import Dots from '../Loaders/Dots';
+import Bars from '../Loaders/Bars';
+import Pulse from '../Loaders/Pulse';
+import Squares from '../Loaders/Squares';
+import SpinDots from '../Loaders/SpinDots';
+import Cylon from '../Loaders/Cylon';
+import HyperTriangle from '../Loaders/HyperTriangle';
 
 class SpinnerMaker {
   static title = 'Spinner'

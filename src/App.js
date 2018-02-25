@@ -1,156 +1,95 @@
 import React, { Component } from 'react';
-import InputTable from './InputTable'
-import * as Loaders from './LoaderMakers';
+import SideMenu from './Components/View/SideMenu'
+import Inputs from './Components/View/Inputs'
+import * as Loaders from './Components/View/LoaderMakers';
 
 // BUGS BUGS BUGS (and features):
-// does keypress navigation does not work when resize (need to check resize and update)
 // booleans should be 0 or 1 in loaders to make it easier to change in input
-// should have navigation button so mobile can use the auto scrolling
-// add smooth auto scroll
 
-// a FullView is a div that represents a full screen page with everything center.....simple..... (a slideshow sort of)
-class FullView extends Component{
-  render(){
-    const style = {
-      width: '100vw',
-      height: this.props.height, //set by parent to handle window resize
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      backgroundColor: this.props.bgColor,
-      backgroundImage: this.props.backgroundImage,
-      overflow: 'hidden',
-    }
-    return(
-      <div className='Full-View' style={style}>
-        {this.props.stuff}
-      </div>
-    )
-  }
-}
-
-class InnerView extends Component{
+export default class App extends Component{
   constructor(props){
     super(props);
+    const indexMatch = window.location.hash.match(/\d+/);
+    const LoaderMaker = indexMatch && Loaders.Makers[indexMatch[0]] ? Loaders.Makers[indexMatch[0]] : Loaders.Makers[0];
     this.state = {
-      inputValues: this.props.maker.defaults,
-      loader: this.props.maker.make(this.props.maker.defaults),
-    }
-    this.handleInput = this.handleInput.bind(this);
-  }
-  handleInput(e, inputIndex){
-    const inputValues = this.state.inputValues.slice();
-    inputValues[inputIndex] = e.target.value;
-    this.setState({
-      inputValues: inputValues,
-      loader: this.props.maker.make(inputValues),
-    })
-  }
-  render(){
-    const innerViewStyle={
-      display:'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'column'
-     }
-    return(
-      <div style={innerViewStyle}>
-        {this.state.loader}
-        <InputTable
-          title={this.props.maker.title}
-          titles={this.props.maker.titles}
-          values={this.state.inputValues}
-          handleInput={this.handleInput}/>
-      </div>
-    )
-  }
-}
+      leftMenu: false,
+      rightMenu: false,
+      LoaderMaker: LoaderMaker,
+      inputValues: LoaderMaker.defaults
 
-class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      positions: [],
-      viewSize: 0,
-      windowHeight: 0,
     }
-    this.handleResize = this.handleResize.bind(this);
-    this.findNext = this.findNext.bind(this);
-    this.handleKeys = this.handleKeys.bind(this);
+    this.changeLoader = this.changeLoader.bind(this);
+    this.makeLinks = this.makeLinks.bind(this);
+    this.handleInputs = this.handleInputs.bind(this);
+    this.getInputs = this.getInputs.bind(this);
+    this.handleMenuClick = this.handleMenuClick.bind(this);
   }
-  componentDidMount(){
-    this.handleResize();
-    window.addEventListener('resize', this.handleResize);
+  componentDidMount() {
+    window.addEventListener("hashchange", this.changeLoader, false);
   }
-  componentWillUnmount(){
-    window.removeEventListener('resize', this.handleResize);
+
+  componentWillUnmount() {
+    window.removeEventListener("hashchange", this.changeLoader, false);
   }
-  handleResize(){
-    const views = document.getElementsByClassName('Full-View');
-    const viewsPosition = [];
-    const viewSize = window.innerHeight;
-    let viewPos = 0;
-    for(let i = 0; i < views.length; i++){
-      viewsPosition.push(viewPos);
-      viewPos+=viewSize;
-    }
+  changeLoader(){
+    const indexMatch = window.location.hash.match(/\d+/);
+    const LoaderMaker = indexMatch && Loaders.Makers[indexMatch[0]] ? Loaders.Makers[indexMatch[0]] : Loaders.Makers[0];
     this.setState({
-      positions: viewsPosition,
-      viewSize: viewSize,
+      rightMenu: false,
+      LoaderMaker: LoaderMaker,
+      inputValues: LoaderMaker.defaults
     })
   }
-  findNext(currPos, forward){
-    // cant divide by zero
-    if(currPos === 0) return forward ? this.state.positions[1] : this.state.positions[-1] ;
-    return this.state.positions[Math.floor(currPos / this.state.viewSize) + (forward ? 1 : -1)];
-  }
-  handleKeys(e){
-    let nextPos = undefined;
-    let currPos = window.pageYOffset;
-    switch(e.keyCode){
-      case 37:
-        // left
-        nextPos = this.findNext(currPos, false)
-        break;
-      case 38:
-        // up
-        nextPos = this.findNext(currPos, false)
-        break;
-      case 39:
-        // right
-        nextPos = this.findNext(currPos, true)
-        break;
-      case 40:
-        // down
-        nextPos = this.findNext(currPos, true)
-        break;
-      default:
-        break;
-    }
-    if(nextPos !== undefined) window.scroll(0, nextPos);
-  }
-  // make views automatically just add them in Loaders.Makers array
-  makeViews(height){
-    const Views = [];
+  makeLinks(){
+    const links = [];
     for(let i = 0; i < Loaders.Makers.length; i++){
-      Views.push(
-        <FullView
-          key={i+'FullView'}
-          stuff={(<InnerView maker={Loaders.Makers[i]}/>)}
-          bgColor={'rgb(225,225,225)'}
-          height={height}/>
-      )
-    }
-    return Views;
+      links.push(
+        <a className='menu-link' href={'#' + i}>
+          {Loaders.Makers[i].title}
+          <div className='line'/>
+        </a>)
+      }
+    return links;
+  }
+  handleInputs(newInputs){
+    this.setState({inputValues: newInputs})
+  }
+  getInputs(){
+    return(<Inputs key={this.state.LoaderMaker.title} LoaderMaker={this.state.LoaderMaker} handleInput={this.handleInputs}/>)
+  }
+  handleMenuClick(menu){
+    this.setState({
+      leftMenu: menu === 'left' ? !this.state.leftMenu : false,
+      rightMenu: menu === 'right' ? !this.state.rightMenu : false,
+    })
   }
   render() {
-    const Views = this.makeViews(this.state.viewSize);
     return (
-      <div onKeyDown={this.handleKeys} tabIndex="0">
-        {Views}
+      <div>
+        <div className='menus'>
+          <SideMenu
+            backgroundColor='rgba(50,50,200,.3)'
+            positions='left'
+            active={this.state.leftMenu}
+            handleMenuClick={this.handleMenuClick}
+            menuType='Dots'>
+            {this.getInputs()}
+          </SideMenu>
+          <SideMenu
+            backgroundColor='rgba(200,50,200,.3)'
+            positions='right'
+            active={this.state.rightMenu}
+            handleMenuClick={this.handleMenuClick}
+            menuType='Hamburger'>
+            {this.makeLinks()}
+          </SideMenu>
+        </div>
+        <div className={'loader-box ' + (this.state.leftMenu || this.state.rightMenu ? 'active' : '')}>
+          {this.state.LoaderMaker.make(this.state.inputValues)}
+        </div>
       </div>
     );
   }
 }
 
-export default App;
+// export default App;
