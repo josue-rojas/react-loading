@@ -16,11 +16,12 @@ export default class Spin extends Component{
     const style={
       width: this.props.size + 'px',
       height: this.props.size + 'px',
-      border: this.props.borderSize + 'px solid ' + this.props.primaryColor,
-      borderLeft: this.props.borderSize + 'px solid ' + this.props.secondaryColor,
-      borderRight: this.props.borderSize + 'px solid ' + (this.props.doubleBorder ? this.props.secondaryColor : this.props.primaryColor),
+      borderTop: this.props.borderSize + 'px solid ' + this.props.primaryColor,
+      borderRight: this.props.borderSize + 'px solid ' + this.props.secondaryColor,
+      borderBottom: this.props.borderSize + 'px solid ' + this.props.thirdColor,
+      borderLeft: this.props.borderSize + 'px solid ' + this.props.fourthColor,
       borderRadius: '100%',
-      animation: 'spin ' + this.props.delay + ' linear infinite'
+      animation: 'spin ' + this.props.delay + 'ms linear infinite'
     }
     return (
       <div style={style} className={this.props.className}/>
