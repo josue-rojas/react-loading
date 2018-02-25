@@ -12,8 +12,8 @@ import HyperTriangle from '../Loaders/HyperTriangle';
 
 class SpinnerMaker {
   static title = 'Spinner'
-  static titles = ['size', 'borderSize', 'primaryColor', 'secondaryColor', 'delay', 'doubleBorder']
-  static defaults = [100, 3, 'rgba(0, 0, 0, 0.1)', 'red', '1s', 1]
+  static titles = ['size', 'borderSize', 'primaryColor', 'secondaryColor', 'thirdColor', 'fourthColor', 'delay', 'doubleBorder']
+  static defaults = [100, 3, 'rgba(0, 0, 0, 0.1)', 'red', 'rgba(0, 0, 0, 0.1)', 'red', 1000, 1]
   static make(props = this.defaults){
     return (<Spin
       key={Math.random()}
@@ -21,8 +21,10 @@ class SpinnerMaker {
       borderSize={props[1]}
       primaryColor={props[2]}
       secondaryColor={props[3]}
-      delay={props[4]}
-      doubleBorder={props[5]}/>)
+      thirdColor={props[4]}
+      fourthColor={props[5]}
+      delay={props[6]}
+      doubleBorder={props[7]}/>)
   }
 }
 
@@ -66,7 +68,7 @@ class BarsMaker {
 class PulseMaker {
   static title = 'Pulse';
   static titles = ['maxSize', 'minSize', 'borderSize', 'color', 'delay']
-  static defaults = [100, 10, 1, 'rgb(223, 77, 255)',1000]
+  static defaults = [100, 10, 1, 'rgb(0, 200, 255)',1000]
   static make(props=this.defaults){
     return(
       <Pulse
