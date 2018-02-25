@@ -12,8 +12,8 @@ import HyperTriangle from '../Loaders/HyperTriangle';
 
 class SpinnerMaker {
   static title = 'Spinner'
-  static titles = ['size', 'borderSize', 'primaryColor', 'secondaryColor', 'thirdColor', 'fourthColor', 'delay', 'doubleBorder']
-  static defaults = [100, 3, 'rgba(0, 0, 0, 0.1)', 'red', 'rgba(0, 0, 0, 0.1)', 'red', 1000, 1]
+  static titles = ['size', 'borderSize', 'primaryColor', 'secondaryColor', 'thirdColor', 'fourthColor', 'delay']
+  static defaults = [100, 3, 'rgba(0, 0, 0, 0.1)', 'red', 'rgba(0, 0, 0, 0.1)', 'red', 1000]
   static make(props = this.defaults){
     return (<Spin
       key={Math.random()}
@@ -23,8 +23,7 @@ class SpinnerMaker {
       secondaryColor={props[3]}
       thirdColor={props[4]}
       fourthColor={props[5]}
-      delay={props[6]}
-      doubleBorder={props[7]}/>)
+      delay={props[6]}/>)
   }
 }
 
