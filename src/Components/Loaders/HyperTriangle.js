@@ -26,7 +26,7 @@ class Triangle extends Component{
     this.changeSize = this.changeSize.bind(this);
   }
   componentDidMount(){
-    this.timer = setInterval(this.changeSize, 1);
+    this.timer = setInterval(this.changeSize, 16);
   }
   componentWillUnmount(){
     clearInterval(this.timer);

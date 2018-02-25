@@ -168,8 +168,38 @@ export default class App extends Component{
     this.state = {
       leftMenu: false,
       rightMenu: false,
+      index: window.location.hash ? window.location.hash.match(/\d+/)[0] : 0,
     }
+    this.changeLoader = this.changeLoader.bind(this);
+    this.makeLinks = this.makeLinks.bind(this);
     this.handleMenuClick = this.handleMenuClick.bind(this);
+  }
+  componentDidMount() {
+    window.addEventListener("hashchange", this.changeLoader, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("hashchange", this.changeLoader, false);
+  }
+  changeLoader(){
+    this.setState({
+      index: window.location.hash.match(/\d+/)[0],
+      rightMenu: false,
+    })
+  }
+  makeLinks(){
+    const links = [];
+    const makerMap = {};
+    for(let i = 0; i < Loaders.Makers.length; i++){
+      links.push(
+        <a className='menu-link' href={'#' + i}>
+          {Loaders.Makers[i].title}
+        </a>)
+      }
+    return links;
+  }
+  getLoader(i){
+    return Loaders.Makers[this.state.index] ? Loaders.Makers[this.state.index].make() : Loaders.Makers[0].make()
   }
   handleMenuClick(menu){
     this.setState({
@@ -180,22 +210,27 @@ export default class App extends Component{
   render() {
     return (
       <div onKeyDown={this.handleKeys} tabIndex="0">
-        <SideMenu
-          backgroundColor='rgba(50,50,200,.5)'
-          positions='left'
-          active={this.state.leftMenu}
-          handleMenuClick={this.handleMenuClick}
-          menuType='Dots'>
-          Hello
-        </SideMenu>
-        <SideMenu
-          backgroundColor='rgba(200,50,200,.5)'
-          positions='right'
-          active={this.state.rightMenu}
-          handleMenuClick={this.handleMenuClick}
-          menuType='Hamburger'>
-          bye
-        </SideMenu>
+        <div className='menus'>
+          <SideMenu
+            backgroundColor='rgba(50,50,200,.4)'
+            positions='left'
+            active={this.state.leftMenu}
+            handleMenuClick={this.handleMenuClick}
+            menuType='Dots'>
+            Hello
+          </SideMenu>
+          <SideMenu
+            backgroundColor='rgba(200,50,200,.4)'
+            positions='right'
+            active={this.state.rightMenu}
+            handleMenuClick={this.handleMenuClick}
+            menuType='Hamburger'>
+            {this.makeLinks()}
+          </SideMenu>
+        </div>
+        <div className={'loader-box ' + (this.state.leftMenu || this.state.rightMenu ? 'active' : '')}>
+          {this.getLoader()}
+        </div>
       </div>
     );
   }

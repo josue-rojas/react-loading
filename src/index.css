@@ -3,4 +3,43 @@ body {
   padding: 0;
   font-family: sans-serif;
   transform: translateZ(0);
+  background: linear-gradient(rgba(50,50,255,.4), rgba(200,50,200,.4));
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a{
+  text-decoration: none;
+  color: black;
+}
+a:hover{
+  text-decoration: none;
+}
+
+.menu-link{
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  transition: 300ms;
+}
+.menu-link:hover{
+  opacity: .7;
+}
+
+.loader-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50vh;
+}
+.loader-box.active{
+  filter: blur(5px);
+}
+
+@media (min-width: 992px){
+  .loader-box.active{
+    filter: blur(0px);
+  }
 }
