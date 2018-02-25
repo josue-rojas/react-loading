@@ -9,6 +9,8 @@ import Squares from '../Loaders/Squares';
 import SpinDots from '../Loaders/SpinDots';
 import Cylon from '../Loaders/Cylon';
 import HyperTriangle from '../Loaders/HyperTriangle';
+import TrippyClock from '../Loaders/TrippyClock';
+
 
 class SpinnerMaker {
   static title = 'Spinner'
@@ -151,4 +153,24 @@ class HyperTriangleMaker {
   }
 }
 
-export const Makers = [SpinnerMaker, DotMaker, BarsMaker, PulseMaker, SquaresMaker, SpinDotsMaker, CylonMaker, HyperTriangleMaker]
+class TrippyClockMaker {
+  static title = 'TrippyClock';
+  static titles = ['width', 'height', 'color', 'numHands', 'delay', 'handDelay', 'opacChange', 'alternate'];
+  static defaults = [10, 90, 'rgb(50, 150, 255)', 10, 2000, 60, .1, 'true'];
+  static make(props=this.defaults){
+    return(
+      <TrippyClock
+        key={Math.random()}
+        width={props[0]}
+        height={props[1]}
+        color={props[2]}
+        numHands={props[3]}
+        delay={props[4]}
+        handDelay={parseInt(props[5],10)}
+        opacChange={parseFloat(props[6])}
+        alternate={props[7] === 'true'}/>
+    )
+  }
+}
+
+export const Makers = [SpinnerMaker, DotMaker, BarsMaker, PulseMaker, SquaresMaker, SpinDotsMaker, CylonMaker, HyperTriangleMaker, TrippyClockMaker]
