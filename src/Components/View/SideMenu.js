@@ -40,9 +40,15 @@ export default class SideMenu extends Component{
       SideMenu: {
         backgroundColor: this.props.backgroundColor,
       },
+      wrapper: {
+        position: 'absolute',
+        overflow: 'hidden',
+        width: '100vw',
+        height: '100vh',
+      }
     }
     return(
-      <div>
+      <div style={style.wrapper}>
         <div style={style.icon} className={'icon ' + this.props.positions}>
           {this.menuType(this.props.menuType)}
         </div>
