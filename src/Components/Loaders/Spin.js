@@ -7,6 +7,8 @@ import './Styles/Spin.css';
 // borderSize: int size of the outer circle
 // primaryColor: string of color (rgba, rgb, hex, etc)
 // secondaryColor: string of color (rgba, rgb, hex, etc)
+// thirdColor: string of color (rgba, rgb, hex, etc)
+// fourthColor: string of color (rgba, rgb, hex, etc)
 // delay: string of delay of circle spinning (1s, 400ms, etc)
 // doubleBorder: boolean to have 2 border or one
 // className: same as default
