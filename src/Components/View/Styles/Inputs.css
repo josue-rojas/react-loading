@@ -1,21 +1,26 @@
 .inputs{
   margin-bottom: 10px;
 }
+.inputs:last-child{
+  padding-bottom: 40px;
+}
 .input-title{
   color: #e7e7e7;
   margin-bottom: 5px;
 }
 .inputs-box{
-  width: 100%;
+  width: calc(100% - 20px);
   font-size: 1.2rem;
   background-color: rgba(0,0,0,0);
   border: none;
   padding: 10px;
   color: #e7e7e7;
   border: 1px solid rgba(255,255,255,.2);
-  outline: none
+  outline: none;
+  transition: 300ms;
 }
 .inputs-box:focus{
   color: rgba(5, 244, 255, 1);
   border: 1px solid rgba(5, 244, 255, 1);
+  box-shadow: 0px 0px 3px rgba(5, 244, 255, 1)
 }
