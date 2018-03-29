@@ -10,6 +10,7 @@ import SpinDots from '../Loaders/SpinDots';
 import Cylon from '../Loaders/Cylon';
 import HyperTriangle from '../Loaders/HyperTriangle';
 import TrippyClock from '../Loaders/TrippyClock';
+import Gradient from '../Loaders/Gradient';
 
 
 class SpinnerMaker {
@@ -173,4 +174,23 @@ class TrippyClockMaker {
   }
 }
 
-export const Makers = [SpinnerMaker, DotMaker, BarsMaker, PulseMaker, SquaresMaker, SpinDotsMaker, CylonMaker, HyperTriangleMaker, TrippyClockMaker]
+class GradientMaker {
+  static title = 'Gradient';
+  static titles = ['width', 'height', 'colors', 'delay', 'isCircle', 'rotate'];
+  static defaults = ['100px', '95px', 'rgba(195, 95, 95, 0.5), rgba(55, 255, 255, 0.14), rgba(195, 95, 95, 0.5)', 1500, 'true', 'true'];
+  static make(props=this.defaults){
+    return(
+      <Gradient
+        key={Math.random()}
+        width={props[0]}
+        height={props[1]}
+        colors={props[2]}
+        delay={props[3]}
+        circle={props[4] === 'true'}
+        rotate={props[5] === 'true'}
+        />
+    )
+  }
+}
+
+export const Makers = [SpinnerMaker, DotMaker, BarsMaker, PulseMaker, SquaresMaker, SpinDotsMaker, CylonMaker, HyperTriangleMaker, TrippyClockMaker, GradientMaker]
