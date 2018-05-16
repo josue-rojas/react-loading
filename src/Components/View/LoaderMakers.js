@@ -11,7 +11,7 @@ import Cylon from '../Loaders/Cylon';
 import HyperTriangle from '../Loaders/HyperTriangle';
 import TrippyClock from '../Loaders/TrippyClock';
 import Gradient from '../Loaders/Gradient';
-
+import Splash from '../Loaders/Splash';
 
 class SpinnerMaker {
   static title = 'Spinner'
@@ -193,4 +193,25 @@ class GradientMaker {
   }
 }
 
-export const Makers = [SpinnerMaker, DotMaker, BarsMaker, PulseMaker, SquaresMaker, SpinDotsMaker, CylonMaker, HyperTriangleMaker, TrippyClockMaker, GradientMaker]
+class SplashMaker {
+  static title = 'Splash';
+  static titles = ['maxSize', 'numSplash', 'color', 'delay', 'splashDelay', 'isCircle', 'alternate', 'rotate'];
+  static defaults = ['200px', '5', 'rgb(34, 155, 253)', '4000', '200', 'true', 'false', 'false'];
+  static make(props=this.defaults){
+    return(
+      <Splash
+        key={Math.random()}
+        maxSize={props[0]}
+        numSplash={props[1]}
+        color={props[2]}
+        delay={parseInt(props[3],10)}
+        splashDelay={parseInt(props[4],10)}
+        isCircle={props[5] === 'true'}
+        alternate={props[6] === 'true'}
+        rotate={props[7] === 'true'}
+        />
+    )
+  }
+}
+
+export const Makers = [SpinnerMaker, DotMaker, BarsMaker, PulseMaker, SquaresMaker, SpinDotsMaker, CylonMaker, HyperTriangleMaker, TrippyClockMaker, GradientMaker, SplashMaker]
