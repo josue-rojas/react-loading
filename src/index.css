@@ -16,10 +16,12 @@ body {
 
 a{
   text-decoration: none;
-  color: black;
+  color: #e7e7e7;
+  transition: 400ms;
 }
 a:hover{
   text-decoration: none;
+  color: rgba(5, 244, 255, 1);;
 }
 
 .menu-link{
@@ -51,14 +53,33 @@ a:hover{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 60vh;
+  max-height: 100vh;
 }
-.loader-box.active{
+
+.view {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: 400ms;
+}
+.view.active{
   filter: blur(5px);
+}
+.view .loader-box {
+  margin: auto;
+}
+.view .footer {
+  position: fixed;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  z-index: 10;
+  /* margin-bottom: 10px; */
+  font-size: .9rem
 }
 
 @media (min-width: 992px){
-  .loader-box.active{
+  .view.active{
     filter: blur(0px);
   }
 }

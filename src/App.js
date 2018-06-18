@@ -84,8 +84,13 @@ export default class App extends Component{
             {this.makeLinks()}
           </SideMenu>
         </div>
-        <div className={'loader-box ' + (this.state.leftMenu || this.state.rightMenu ? 'active' : '')}>
-          {this.state.LoaderMaker.make(this.state.inputValues)}
+        <div className={'view ' + (this.state.leftMenu || this.state.rightMenu ? 'active' : '')}>
+          <div className='loader-box'>
+            {this.state.LoaderMaker.make(this.state.inputValues)}
+          </div>
+          <footer className='footer'>
+            <a href='https://github.com/josuerojasrojas/react-loading'>Source</a>
+          </footer>
         </div>
       </div>
     );
