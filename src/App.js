@@ -55,7 +55,12 @@ export default class App extends Component{
     this.setState({inputValues: newInputs})
   }
   getInputs(){
-    return(<Inputs key={this.state.LoaderMaker.title} LoaderMaker={this.state.LoaderMaker} handleInput={this.handleInputs}/>)
+    return(
+      <Inputs
+        key={this.state.LoaderMaker.title}
+        LoaderMaker={this.state.LoaderMaker}
+        handleInput={this.handleInputs}/>
+    )
   }
   handleMenuClick(menu){
     this.setState({
