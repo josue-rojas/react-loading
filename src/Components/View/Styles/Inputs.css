@@ -18,7 +18,36 @@
   border: 1px solid rgba(255,255,255,.2);
   outline: none;
   transition: 300ms;
+  -webkit-appearance: none;
+  border-radius: 0
 }
+.inputs-box.toggle {
+  display: none;
+}
+.div-toggle {
+  display: none;
+}
+.div-toggle.toggle {
+  display: inline-block;
+  width: calc(100% - 0px);
+  position: relative;
+  box-sizing: content-box;
+  border: none;
+  border: 1px solid rgba(255,255,255,.2);
+  cursor: pointer;
+}
+.toggler {
+  height: calc(1.2rem + 20px);
+  width: 50%;
+  background-color: rgba(255,255,255,.55);
+  margin-left: 0;
+  transition: margin-left 300ms, background-color 300ms;
+}
+.toggler.true {
+  margin-left: 50%;
+  background-color: rgba(255,255,255,.7);
+}
+
 .inputs-box:focus{
   color: rgba(5, 244, 255, 1);
   border: 1px solid rgba(5, 244, 255, 1);

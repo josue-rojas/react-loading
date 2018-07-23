@@ -87,7 +87,7 @@ class PulseMaker {
 class SquaresMaker {
   static title = 'Squares';
   static titles = ['size', 'numSquares', 'delay', 'squareDelay', 'color', 'alternate']
-  static defaults = [100, 4, 2000, 70, 'rgb(103, 77, 255)', 1]
+  static defaults = [100, 4, 2000, 70, 'rgb(103, 77, 255)', true]
   static make(props=this.defaults){
     return(
       <Squares
@@ -157,7 +157,7 @@ class HyperTriangleMaker {
 class TrippyClockMaker {
   static title = 'TrippyClock';
   static titles = ['width', 'height', 'color', 'numHands', 'delay', 'handDelay', 'opacChange', 'alternate'];
-  static defaults = [10, 90, 'rgb(50, 150, 255)', 10, 2000, 60, .1, 'true'];
+  static defaults = [10, 90, 'rgb(50, 150, 255)', 10, 2000, 60, .1, true];
   static make(props=this.defaults){
     return(
       <TrippyClock
@@ -169,7 +169,7 @@ class TrippyClockMaker {
         delay={props[4]}
         handDelay={parseInt(props[5],10)}
         opacChange={parseFloat(props[6])}
-        alternate={props[7] === 'true'}/>
+        alternate={props[7]}/>
     )
   }
 }
@@ -177,7 +177,7 @@ class TrippyClockMaker {
 class GradientMaker {
   static title = 'Gradient';
   static titles = ['width', 'height', 'colors', 'delay', 'isCircle', 'rotate'];
-  static defaults = ['100px', '95px', 'rgba(195, 95, 95, 0.5), rgba(55, 255, 255, 0.14), rgba(195, 95, 95, 0.5)', 1500, 'true', 'true'];
+  static defaults = ['100px', '95px', 'rgba(195, 95, 95, 0.5), rgba(55, 255, 255, 0.14), rgba(195, 95, 95, 0.5)', 1500, true, true];
   static make(props=this.defaults){
     return(
       <Gradient
@@ -186,8 +186,8 @@ class GradientMaker {
         height={props[1]}
         colors={props[2]}
         delay={props[3]}
-        circle={props[4] === 'true'}
-        rotate={props[5] === 'true'}
+        circle={props[4]}
+        rotate={props[5]}
         />
     )
   }
@@ -196,7 +196,7 @@ class GradientMaker {
 class SplashMaker {
   static title = 'Splash';
   static titles = ['maxSize', 'numSplash', 'color', 'delay', 'splashDelay', 'isCircle', 'alternate', 'rotate'];
-  static defaults = ['200px', '5', 'rgb(34, 155, 253)', '4000', '200', 'true', 'false', 'false'];
+  static defaults = ['200px', '5', 'rgb(34, 155, 253)', '4000', '200', true, false, false];
   static make(props=this.defaults){
     return(
       <Splash
@@ -206,9 +206,9 @@ class SplashMaker {
         color={props[2]}
         delay={parseInt(props[3],10)}
         splashDelay={parseInt(props[4],10)}
-        isCircle={props[5] === 'true'}
-        alternate={props[6] === 'true'}
-        rotate={props[7] === 'true'}
+        isCircle={props[5]}
+        alternate={props[6]}
+        rotate={props[7]}
         />
     )
   }
